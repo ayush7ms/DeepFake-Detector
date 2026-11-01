@@ -1,0 +1,396 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#090b12">
+    <meta name="description" content="DeepTruth digital media forensics investigation workspace">
+    <title>DeepTruth — Media Forensics</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    >
+    <link rel="stylesheet" href="style.css">
+  </head>
+
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="app-shell">
+      <aside class="sidebar" id="sidebar">
+        <a class="brand" href="#dashboard" aria-label="DeepTruth dashboard">
+          <span class="brand-mark" aria-hidden="true">⌖</span>
+          <span>
+            deep<span class="brand-light">truth</span>
+            <small>MEDIA FORENSICS</small>
+          </span>
+        </a>
+
+        <div class="nav-label">WORKSPACE</div>
+        <nav class="main-nav" aria-label="Main navigation">
+          <button class="nav-item active" data-page="dashboard" type="button"><span aria-hidden="true">▦</span>Dashboard</button>
+          <button class="nav-item" data-page="image" type="button"><span aria-hidden="true">▧</span>Image Investigation</button>
+          <button class="nav-item" data-page="video" type="button"><span aria-hidden="true">▷</span>Video Investigation</button>
+          <button class="nav-item" data-page="audio" type="button"><span aria-hidden="true">◖</span>Audio Investigation</button>
+          <button class="nav-item" data-page="history" type="button"><span aria-hidden="true">◷</span>Investigation History</button>
+          <button class="nav-item" data-page="about" type="button"><span aria-hidden="true">ⓘ</span>Methodology</button>
+        </nav>
+
+        <div class="sidebar-bottom">
+          <div class="workspace-card" role="status" aria-live="polite">
+            <i class="status-dot" id="connDot" aria-hidden="true"></i>
+            <div>
+              <strong>Local workspace</strong>
+              <small id="connText">Checking backend…</small>
+            </div>
+          </div>
+          <div class="user-row">
+            <div class="avatar" aria-hidden="true">DT</div>
+            <div>
+              <strong>Investigator</strong>
+              <small>Personal workspace</small>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <main class="main-content" id="main">
+        <header class="topbar">
+          <button class="icon-button mobile-menu" id="menuToggle" type="button" aria-label="Toggle navigation" aria-controls="sidebar">☰</button>
+          <nav class="breadcrumbs" aria-label="Breadcrumb">
+            <span>Workspace</span>
+            <span class="crumb-slash" aria-hidden="true">/</span>
+            <strong id="pageCrumb" aria-current="page">Dashboard</strong>
+          </nav>
+          <div class="top-actions">
+            <span class="environment" id="connChip"><i aria-hidden="true"></i><span id="connChipText">CONNECTING</span></span>
+            <div class="top-avatar" aria-hidden="true">DT</div>
+          </div>
+        </header>
+
+        <div class="page-wrap">
+          <!-- ============ Dashboard ============ -->
+          <section class="page-section active" id="page-dashboard" aria-labelledby="dashboard-title">
+            <div class="welcome-row">
+              <div>
+                <div class="eyebrow"><span aria-hidden="true"></span>DIGITAL MEDIA FORENSICS</div>
+                <h1 id="dashboard-title">Investigation workspace</h1>
+                <p class="muted">We don’t just tell you whether media is suspicious. We show you why, where and how much you should trust the result.</p>
+              </div>
+              <button class="button button-secondary" data-go="history" type="button">View investigations</button>
+            </div>
+
+            <div class="stats-grid" id="statsGrid">
+              <article class="stat-card">
+                <div class="stat-top"><span>Investigations</span><b class="stat-icon purple" aria-hidden="true">▦</b></div>
+                <strong data-stat="total_investigations">—</strong>
+                <small>Completed analyses</small>
+              </article>
+              <article class="stat-card">
+                <div class="stat-top"><span>Images analysed</span><b class="stat-icon blue" aria-hidden="true">▧</b></div>
+                <strong data-stat="images_analyzed">—</strong>
+                <small>DeiTFake v2 classifier</small>
+              </article>
+              <article class="stat-card">
+                <div class="stat-top"><span>Videos analysed</span><b class="stat-icon cyan" aria-hidden="true">▷</b></div>
+                <strong data-stat="videos_analyzed">—</strong>
+                <small>Sampled frames, scored one by one</small>
+              </article>
+              <article class="stat-card">
+                <div class="stat-top"><span>Flagged for review</span><b class="stat-icon amber" aria-hidden="true">⚑</b></div>
+                <strong data-stat="flagged_for_review">—</strong>
+                <small>Elevated score. A prompt to look closer, not a verdict</small>
+              </article>
+            </div>
+            <p class="data-note" id="statsNote">These are real counts from investigations stored by your local backend. Nothing is estimated or pre-filled.</p>
+
+            <div class="section-heading">
+              <div>
+                <h2>Start an investigation</h2>
+                <p>Choose a media type to open an analysis workspace.</p>
+              </div>
+            </div>
+            <div class="investigation-grid">
+              <button class="media-card" data-go="image" type="button">
+                <span class="media-icon image-icon" aria-hidden="true">▧</span>
+                <span class="media-title">Image investigation</span>
+                <span class="media-copy">Score an image with a pretrained classifier and see which regions drove the result.</span>
+                <span class="media-footer">PNG · JPG · WEBP <b aria-hidden="true">↗</b></span>
+              </button>
+              <button class="media-card" data-go="video" type="button">
+                <span class="media-icon video-icon" aria-hidden="true">▷</span>
+                <span class="media-title">Video investigation</span>
+                <span class="media-copy">Extract evenly spaced frames and review each frame’s score on a timeline.</span>
+                <span class="media-footer">MP4 · MOV · WEBM <b aria-hidden="true">↗</b></span>
+              </button>
+              <button class="media-card" data-go="audio" type="button">
+                <span class="media-icon audio-icon" aria-hidden="true">◖</span>
+                <span class="media-title">Audio investigation</span>
+                <span class="media-copy">Preview recordings. Synthetic-voice detection is not enabled yet.</span>
+                <span class="media-footer">WAV · MP3 · M4A <b aria-hidden="true">↗</b></span>
+              </button>
+            </div>
+
+            <div class="dashboard-lower">
+              <section class="panel recent-panel" aria-labelledby="recent-title">
+                <div class="panel-heading">
+                  <div>
+                    <h2 id="recent-title">Recent investigations</h2>
+                    <p>Your latest completed analyses</p>
+                  </div>
+                  <button class="text-button" data-go="history" type="button">View history <span aria-hidden="true">→</span></button>
+                </div>
+                <div id="recentList" class="recent-list"></div>
+              </section>
+              <div class="side-stack">
+                <aside class="panel status-panel" aria-labelledby="status-title">
+                  <h3 id="status-title">Analysers</h3>
+                  <div id="modelStatus" class="status-list"></div>
+                </aside>
+                <aside class="panel band-panel" aria-labelledby="band-title">
+                  <h3 id="band-title">Score bands so far</h3>
+                  <div id="bandChart" class="band-chart"></div>
+                  <p class="fine">Bands describe where a model score fell. They are not verdicts.</p>
+                </aside>
+              </div>
+            </div>
+          </section>
+
+          <!-- ============ Image ============ -->
+          <section class="page-section" id="page-image" aria-labelledby="image-title">
+            <div class="page-title">
+              <div>
+                <div class="eyebrow">MEDIA ANALYSIS</div>
+                <h1 id="image-title">Image investigation</h1>
+                <p class="muted">Upload an image to score it with the DeiTFake v2 classifier and inspect the evidence.</p>
+              </div>
+              <span class="tag">IMAGE · PNG, JPG, WEBP</span>
+            </div>
+            <div class="analysis-layout">
+              <div class="panel upload-panel">
+                <div class="panel-heading">
+                  <div><h2>Upload image</h2><p>Select a file or drag it into the area below.</p></div>
+                </div>
+                <div class="dropzone" data-kind="image" tabindex="0" role="button" aria-label="Choose an image file or drop it here">
+                  <input class="file-input" type="file" accept="image/png,image/jpeg,image/webp" aria-label="Choose image file">
+                  <div class="upload-glyph" aria-hidden="true">↑</div>
+                  <strong>Drop your image here</strong>
+                  <span>or <u>browse files</u> from your device</span>
+                  <small>PNG, JPG or WEBP · up to 25 MB</small>
+                </div>
+                <div class="file-preview hidden"></div>
+                <div class="upload-error" aria-live="polite"></div>
+                <div class="upload-actions">
+                  <span class="privacy-note">Sent only to your local DeepTruth server and deleted after analysis.</span>
+                  <button class="button button-primary analyze-button" type="button" disabled>Analyse image</button>
+                </div>
+                <div class="progress hidden" role="progressbar" aria-valuemin="0" aria-valuemax="100"><i></i></div>
+                <div class="analysis-feedback hidden" aria-live="polite"></div>
+              </div>
+              <aside class="panel guidance-panel">
+                <span class="guidance-icon" aria-hidden="true">✳</span>
+                <h3>What you will get</h3>
+                <p>A model score, a check that the image is the kind this model understands, and a Grad-CAM view of what influenced the score.</p>
+                <div class="guide-step"><span class="step-mark">1</span><span><strong>Score</strong><small>The checkpoint’s own fake-class output</small></span></div>
+                <div class="guide-step"><span class="step-mark">2</span><span><strong>Scope check</strong><small>Is a face present? The model is face-focused</small></span></div>
+                <div class="guide-step"><span class="step-mark">3</span><span><strong>Explanation</strong><small>Where the model looked, not proof of edits</small></span></div>
+              </aside>
+            </div>
+            <section class="panel result-panel" id="result-image" aria-label="Image investigation results" aria-live="polite"></section>
+          </section>
+
+          <!-- ============ Video ============ -->
+          <section class="page-section" id="page-video" aria-labelledby="video-title">
+            <div class="page-title">
+              <div>
+                <div class="eyebrow">MEDIA ANALYSIS</div>
+                <h1 id="video-title">Video investigation</h1>
+                <p class="muted">Frames are extracted from your video and scored one at a time with the image model.</p>
+              </div>
+              <span class="tag">VIDEO · MP4, MOV, WEBM</span>
+            </div>
+            <div class="analysis-layout">
+              <div class="panel upload-panel">
+                <div class="panel-heading"><div><h2>Upload video</h2><p>Choose a video, preview it, then analyse it.</p></div></div>
+                <div class="dropzone" data-kind="video" tabindex="0" role="button" aria-label="Choose a video file or drop it here">
+                  <input class="file-input" type="file" accept="video/mp4,video/quicktime,video/webm" aria-label="Choose video file">
+                  <div class="upload-glyph" aria-hidden="true">↑</div>
+                  <strong>Drop your video here</strong>
+                  <span>or <u>browse files</u> from your device</span>
+                  <small>MP4, MOV or WEBM · up to 250 MB</small>
+                </div>
+                <div class="file-preview hidden"></div>
+                <div class="upload-error" aria-live="polite"></div>
+                <div class="upload-actions">
+                  <span class="privacy-note">Sent only to your local DeepTruth server and deleted after analysis.</span>
+                  <button class="button button-primary analyze-button" type="button" disabled>Analyse video</button>
+                </div>
+                <div class="progress hidden" role="progressbar" aria-valuemin="0" aria-valuemax="100"><i></i></div>
+                <div class="analysis-feedback hidden" aria-live="polite"></div>
+              </div>
+              <aside class="panel guidance-panel">
+                <span class="guidance-icon blue-text" aria-hidden="true">▷</span>
+                <h3>How video is handled</h3>
+                <p>This is frame-by-frame image classification. It does not analyse motion, lip-sync or sound.</p>
+                <div class="guide-step"><span class="step-mark">1</span><span><strong>Extract</strong><small>Evenly spaced frames from the video</small></span></div>
+                <div class="guide-step"><span class="step-mark">2</span><span><strong>Score</strong><small>Each frame is scored independently</small></span></div>
+                <div class="guide-step"><span class="step-mark">3</span><span><strong>Review</strong><small>Timeline marks frames worth a closer look</small></span></div>
+              </aside>
+            </div>
+            <section class="panel result-panel" id="result-video" aria-label="Video investigation results" aria-live="polite"></section>
+          </section>
+
+          <!-- ============ Audio ============ -->
+          <section class="page-section" id="page-audio" aria-labelledby="audio-title">
+            <div class="page-title">
+              <div>
+                <div class="eyebrow">MEDIA ANALYSIS</div>
+                <h1 id="audio-title">Audio investigation</h1>
+                <p class="muted">Preview a recording. Synthetic-voice analysis needs a reviewed detector model.</p>
+              </div>
+              <span class="tag">AUDIO · WAV, MP3, M4A</span>
+            </div>
+            <div class="notice notice-amber" id="audioNotice" role="status">
+              <strong>Checking audio detector…</strong>
+              <span>Waiting for the backend to report whether a synthetic-audio detector is configured.</span>
+            </div>
+            <div class="analysis-layout">
+              <div class="panel upload-panel">
+                <div class="panel-heading"><div><h2>Upload audio</h2><p>Choose an audio file to play back.</p></div></div>
+                <div class="dropzone" data-kind="audio" tabindex="0" role="button" aria-label="Choose an audio file or drop it here">
+                  <input class="file-input" type="file" accept="audio/wav,audio/mpeg,audio/mp4,audio/x-m4a" aria-label="Choose audio file">
+                  <div class="upload-glyph" aria-hidden="true">↑</div>
+                  <strong>Drop your audio here</strong>
+                  <span>or <u>browse files</u> from your device</span>
+                  <small>WAV, MP3 or M4A · up to 50 MB</small>
+                </div>
+                <div class="file-preview hidden"></div>
+                <div class="upload-error" aria-live="polite"></div>
+                <div class="upload-actions">
+                  <span class="privacy-note">Audio is only analysed when a detector is configured.</span>
+                  <button class="button button-primary analyze-button" type="button" disabled>Analysis unavailable</button>
+                </div>
+                <div class="progress hidden" role="progressbar" aria-valuemin="0" aria-valuemax="100"><i></i></div>
+                <div class="analysis-feedback hidden" aria-live="polite"></div>
+              </div>
+              <aside class="panel guidance-panel">
+                <span class="guidance-icon violet-text" aria-hidden="true">◖</span>
+                <h3>Why no score?</h3>
+                <p>Waveform statistics cannot show that a voice is synthetic, so DeepTruth does not guess. A score will appear only when a documented pretrained detector is registered on the server.</p>
+                <p class="fine">See Methodology for what a suitable detector needs.</p>
+              </aside>
+            </div>
+            <section class="panel result-panel" id="result-audio" aria-label="Audio investigation results" aria-live="polite"></section>
+          </section>
+
+          <!-- ============ History ============ -->
+          <section class="page-section" id="page-history" aria-labelledby="history-title">
+            <div class="page-title">
+              <div>
+                <div class="eyebrow">YOUR WORKSPACE</div>
+                <h1 id="history-title">Investigation history</h1>
+                <p class="muted">Completed investigations stored by your local backend. Uploaded media is never kept.</p>
+              </div>
+              <button class="button button-secondary" data-go="dashboard" type="button">New investigation</button>
+            </div>
+            <section class="panel history-panel" aria-labelledby="history-list-title">
+              <div class="panel-heading">
+                <div><h2 id="history-list-title">All investigations</h2><p>Scores, evidence and limitations are kept so reports can be reopened after a restart.</p></div>
+                <div class="heading-actions">
+                  <span class="tag" id="historyCount">0 ITEMS</span>
+                  <button class="button button-danger" id="clearHistory" type="button" disabled>Clear all</button>
+                </div>
+              </div>
+              <div class="history-list" id="historyList"></div>
+            </section>
+          </section>
+
+          <!-- ============ Methodology ============ -->
+          <section class="page-section" id="page-about" aria-labelledby="about-title">
+            <div class="page-title">
+              <div>
+                <div class="eyebrow">METHODOLOGY</div>
+                <h1 id="about-title">Evidence before certainty.</h1>
+                <p class="muted">What DeepTruth does, which models it uses, and where it stops being reliable.</p>
+              </div>
+              <span class="tag">HACKATHON PROJECT</span>
+            </div>
+
+            <div class="about-grid">
+              <section class="panel about-card wide">
+                <h2>How it works</h2>
+                <ol class="method-steps">
+                  <li><strong>Validate.</strong> The server checks the file type, size and real file signature, and hashes the upload (SHA-256) so a report can identify exactly which file was examined.</li>
+                  <li><strong>Analyse.</strong> Images go to a pretrained classifier. Videos are split into evenly spaced frames, and each frame goes to the same classifier.</li>
+                  <li><strong>Explain.</strong> For images, Grad-CAM shows which patches pushed the score up. A face check tells you whether the image is the kind this model was trained on.</li>
+                  <li><strong>Report.</strong> The score, evidence, warnings and limitations are written to a PDF. The uploaded file is deleted as soon as analysis ends.</li>
+                </ol>
+              </section>
+
+              <section class="panel about-card">
+                <h2>Models and methods</h2>
+                <dl class="spec-list">
+                  <dt>Image and video frames</dt>
+                  <dd><a href="https://huggingface.co/sakshamkr1/deitfake-v2" target="_blank" rel="noopener noreferrer">DeiTFake v2</a>: a DeiT vision transformer for fake-vs-real facial images, trained on OpenForensics-derived data. Apache-2.0 per its model card.</dd>
+                  <dt>Face check</dt>
+                  <dd>OpenCV Haar cascade for frontal faces. A coarse scope check, not a forensic step.</dd>
+                  <dt>Explainability</dt>
+                  <dd>Grad-CAM over the final transformer block’s patch tokens, taken for the model’s fake class.</dd>
+                  <dt>Audio</dt>
+                  <dd>No detector is installed. The server exposes an adapter interface for a reviewed model.</dd>
+                </dl>
+              </section>
+
+              <section class="panel about-card">
+                <h2>Reading a score</h2>
+                <p>The score is the checkpoint’s own output for its “fake” class, on a 0–100% scale. It is <strong>not</strong> a calibrated probability, and it is not the chance that a file is fake.</p>
+                <p>The low / inconclusive / elevated bands are presentation choices for readability. They have not been validated as decision thresholds. A high score means “review this more closely”, and a low score does not prove authenticity.</p>
+              </section>
+
+              <section class="panel about-card">
+                <h2>What it can help with</h2>
+                <ul class="plain-list">
+                  <li>Screening face images for patterns the model learned from its training data</li>
+                  <li>Showing which regions drove a score (explanation of the model, not of the edit)</li>
+                  <li>Spotting individual video frames that deserve a human look</li>
+                  <li>Producing a documented, hash-identified record of what was run</li>
+                </ul>
+              </section>
+
+              <section class="panel about-card">
+                <h2>What it cannot do</h2>
+                <ul class="plain-list">
+                  <li>Prove that any media is real or fake</li>
+                  <li>Reliably judge images without faces, or manipulation types missing from the training data</li>
+                  <li>Detect temporal artefacts in video such as lip-sync or motion inconsistencies</li>
+                  <li>Locate edited pixels. Grad-CAM is not a tamper map</li>
+                  <li>Analyse audio, which is unsupported for now</li>
+                </ul>
+              </section>
+
+              <section class="panel about-card wide">
+                <h2>Audio: what a suitable detector needs</h2>
+                <p>Before a synthetic-speech model is enabled it should have a documented, redistributable licence, evaluation on data that resembles your recordings (compression, languages, noise), and a loading path that does not execute untrusted code. Several public checkpoints exist, but many are small community projects with custom architectures or restrictive licences, so DeepTruth leaves audio disabled instead of presenting an unverified score.</p>
+              </section>
+
+              <section class="panel about-card wide notice-card">
+                <h2>Ethical use</h2>
+                <p>DeepTruth supports careful human review. Do not use a score as the sole basis for accusing, sanctioning or publicly identifying anyone. Automated detectors produce false positives and false negatives. Only analyse media you have a right to examine, respect the privacy and consent of the people shown, and corroborate findings with source verification and expert review.</p>
+              </section>
+            </div>
+          </section>
+        </div>
+
+        <footer class="footer">
+          <span>DEEPTRUTH <b>/</b> MEDIA FORENSICS WORKSPACE</span>
+          <span>Model-assisted review · A score is not proof</span>
+        </footer>
+      </main>
+    </div>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script src="script.js"></script>
+  </body>
+</html>
